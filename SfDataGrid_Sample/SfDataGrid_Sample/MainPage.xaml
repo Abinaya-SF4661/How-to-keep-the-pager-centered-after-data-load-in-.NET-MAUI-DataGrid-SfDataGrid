@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SfDataGrid_Sample.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:pager="clr-namespace:Syncfusion.Maui.DataGrid.DataPager;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:SfDataGrid_Sample">
+    
+    <ContentPage.BindingContext>
+        <local:DataGridViewModel  />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <pager:SfDataPager x:Name ="dataPager" 
+                               Grid.Row="1"
+                               PageSize="15" 
+                               NumericButtonCount="10"
+                               Source="{Binding OrderInfoCollection}"
+                               WidthRequest="500"
+                               HorizontalOptions="Center"
+                               Margin="0,5">
+            </pager:SfDataPager>
+            
+            <syncfusion:SfDataGrid x:Name="dataGrid"
+                                   Grid.Row="0"
+                                   ColumnWidthMode="Fill"
+                                   ItemsSource="{Binding Source={x:Reference dataPager}, Path=PagedSource}">
+            </syncfusion:SfDataGrid>
+            
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
